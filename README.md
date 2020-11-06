@@ -1,6 +1,6 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-#App page [https://instagram-clone-54f9c.web.app/]
+# App page [https://instagram-clone-54f9c.web.app/]
 
 ## Available Scripts
 
