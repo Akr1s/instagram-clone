@@ -1,4 +1,4 @@
-import { Button, Input, makeStyles, Modal } from "@material-ui/core";
+import { Avatar, Button, Input, makeStyles, Modal } from "@material-ui/core";
 import React, { useState, useEffect } from "react";
 import "./App.css";
 import ImageUpload from "./components/ImageUpload";
@@ -6,6 +6,7 @@ import Post from "./components/Post";
 import { db, auth } from "./database";
 import { Link, Switch, Route, useLocation } from "react-router-dom";
 import MultiStepForm from "./components/MultiStepForm/MultiStepForm";
+import Profile from "./components/Profile";
 
 function getModalStyle() {
   const top = 50;
@@ -91,7 +92,6 @@ function App() {
     clearEmailAndPassword();
     setUploadOpen(false);
   }
-
   return (
     <div className="app">
       <Modal open={uploadOpen} onClose={handleUploadClose}>
@@ -174,15 +174,23 @@ function App() {
               >
                 Upload photo
               </Button>
-              <Button
-                color="primary"
-                variant="contained"
-                onClick={() => {
-                  auth.signOut();
-                }}
-              >
-                Logout
-              </Button>
+
+              {location.pathname === "/profile" ? null : (
+                <>
+                  <Button
+                    color="primary"
+                    variant="contained"
+                    onClick={() => {
+                      auth.signOut();
+                    }}
+                  >
+                    Logout
+                  </Button>
+                  <Link className="profileLink" to="/profile">
+                    <Avatar>{user.displayName[0]}</Avatar>
+                  </Link>
+                </>
+              )}
             </div>
           ) : (
             <div className="app__loginContainer">
@@ -232,6 +240,9 @@ function App() {
         </Route>
         <Route path="/register">
           <MultiStepForm setAppUsername={setUsername} />
+        </Route>
+        <Route path="/profile">
+          {user && <Profile userEmail={user.email} />}
         </Route>
       </Switch>
     </div>

@@ -61,7 +61,7 @@ function MultiStepForm({ setAppUsername }) {
           prevStep={prevStep}
           values={values}
           clearData={clearData}
-          setUsername={setAppUsername}
+          setAppUsername={setAppUsername}
         />
       );
       break;

@@ -38,7 +38,7 @@ function Confirm({ nextStep, prevStep, values, clearData, setAppUsername }) {
           <strong>Name</strong> : {username}
         </ListItem>
         <ListItem style={styles.listItem}>
-          <strong>Surname</strong> : {password}
+          <strong>Password</strong> : {password}
         </ListItem>
         <ListItem style={styles.listItem}>
           <strong>Email</strong> : {email}
