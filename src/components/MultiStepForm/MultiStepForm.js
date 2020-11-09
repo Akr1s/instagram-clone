@@ -5,7 +5,7 @@ import PersonalInfo from "./PersonalInfo";
 import PrimaryInfo from "./PrimaryInfo";
 import Success from "./Success";
 
-function MultiStepForm() {
+function MultiStepForm({ setAppUsername }) {
   const [step, setStep] = useState(1);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -61,6 +61,7 @@ function MultiStepForm() {
           prevStep={prevStep}
           values={values}
           clearData={clearData}
+          setUsername={setAppUsername}
         />
       );
       break;

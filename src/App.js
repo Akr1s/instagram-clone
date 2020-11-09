@@ -231,7 +231,7 @@ function App() {
           </div>
         </Route>
         <Route path="/register">
-          <MultiStepForm />
+          <MultiStepForm setAppUsername={setUsername} />
         </Route>
       </Switch>
     </div>

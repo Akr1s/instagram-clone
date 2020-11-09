@@ -3,25 +3,25 @@ import React from "react";
 import { db, auth } from "../../database";
 import firebase from "firebase";
 
-function Confirm({ nextStep, prevStep, values, clearData }) {
+function Confirm({ nextStep, prevStep, values, clearData, setAppUsername }) {
   const { username, bio, password, location, email, age } = values;
 
   const handleConfirm = (event) => {
     event.preventDefault();
 
-    db.collection("users").add({
-      timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-      username,
-      bio,
-      password,
-      location,
-      email,
-      age,
-    });
-
     auth
       .createUserWithEmailAndPassword(email, password)
       .then((authUser) => {
+        db.collection("users").add({
+          timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+          username,
+          bio,
+          password,
+          location,
+          email,
+          age,
+        });
+        setAppUsername(username);
         nextStep();
         clearData();
         return authUser.user.updateProfile({
