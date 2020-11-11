@@ -13,7 +13,7 @@ function PrimaryInfo({ nextStep, values }) {
   return (
     <>
       <h2 className="form__title">Fill fields below</h2>
-      <h3>Forms are without validation</h3>
+      <h3 style={{ color: "red" }}>Forms are without validation</h3>
       <input
         value={username}
         onChange={(event) => setUsername(event.target.value)}

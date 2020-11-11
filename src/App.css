@@ -71,12 +71,18 @@
   margin: 0 10px;
 }
 
-@media (max-width: 870px) {
-  .app__instaEmbed {
-    display: none;
+@media (max-width: 900px) {
+  .app__header {
+    flex-direction: column;
+    align-items: center;
   }
-
-  .app__postsLeft {
-    margin-right: 0px;
+  .app__header__rightSidebar {
+    margin-top: 10px;
+  }
+  .makeStyles-paper-1 {
+    width: 80% !important;
+  }
+  .multiStepForm input {
+    width: 70% !important;
   }
 }
