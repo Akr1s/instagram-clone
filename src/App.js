@@ -7,6 +7,8 @@ import { db, auth } from "./database";
 import { Link, Switch, Route, useLocation } from "react-router-dom";
 import MultiStepForm from "./components/MultiStepForm/MultiStepForm";
 import Profile from "./components/Profile";
+import { ACTIONS } from "./contexts/reducer";
+import { useData } from "./contexts/StateProvider";
 
 function getModalStyle() {
   const top = 50;
@@ -40,28 +42,21 @@ function App() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [username, setUsername] = useState("");
-  const [user, setUser] = useState(null);
   const [openSignIn, setOpenSignIn] = useState(false);
 
   let location = useLocation();
 
-  useEffect(() => {
-    const unsunscribe = auth.onAuthStateChanged((authUser) => {
-      if (authUser) {
-        setUser(authUser);
+  const [{ user }, dispatch] = useData();
 
-        if (authUser.displayName) {
-        } else {
-          return authUser.updateProfile({ displayName: username });
-        }
+  useEffect(() => {
+    auth.onAuthStateChanged((authUser) => {
+      if (authUser) {
+        dispatch({ type: ACTIONS.SET_USER, user: authUser });
       } else {
-        setUser(null);
+        dispatch({ type: ACTIONS.SET_USER, user: null });
       }
     });
-    return () => {
-      unsunscribe();
-    };
-  }, [user, username]);
+  }, []);
 
   useEffect(() => {
     db.collection("posts")
@@ -96,7 +91,7 @@ function App() {
     <div className="app">
       <Modal open={uploadOpen} onClose={handleUploadClose}>
         <div style={modalStyle} className={classes.paper}>
-          {user?.displayName ? (
+          {user ? (
             <ImageUpload
               username={user.displayName}
               closeModal={handleUploadClose}
@@ -187,7 +182,7 @@ function App() {
                     Logout
                   </Button>
                   <Link className="profileLink" to="/profile">
-                    <Avatar>{user.displayName[0]}</Avatar>
+                    <Avatar>{user.email[0]}</Avatar>
                   </Link>
                 </>
               )}
