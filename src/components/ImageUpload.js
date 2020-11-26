@@ -14,7 +14,6 @@ function ImageUpload({ username, closeModal }) {
       setImage(event.target.files[0]);
     }
   };
-
   const handleUpload = () => {
     const uploadTusk = storage.ref(`images/${image.name}`).put(image);
 

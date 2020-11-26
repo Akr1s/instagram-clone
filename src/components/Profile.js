@@ -1,21 +1,30 @@
 import { Avatar } from "@material-ui/core";
 import React, { useState } from "react";
 import { useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
+import { useData } from "../contexts/StateProvider";
 import { db } from "../database";
 import "./Profile.css";
 
-function Profile({ userEmail }) {
-  const [user, setUser] = useState({});
+function Profile() {
   const [loading, setLoading] = useState(true);
 
+  const [userData, setUserData] = useState({});
+  const history = useHistory();
+
+  const [{ user }] = useData();
+  if (!user) {
+    history.push("/");
+  }
+
   const getUserData = async (email) => {
+    if (!email) return;
     db.collection("users")
       .where("email", "==", email)
       .get()
       .then(function (querySnapshot) {
         querySnapshot.forEach(function (doc) {
-          setUser(doc.data());
+          setUserData(doc.data());
         });
         setLoading(false);
       })
@@ -23,9 +32,10 @@ function Profile({ userEmail }) {
         console.log("Error getting documents: ", error);
       });
   };
+
   useEffect(() => {
-    getUserData(userEmail);
-  }, [userEmail]);
+    getUserData(user?.email);
+  }, [user.email]);
 
   if (loading) {
     return (
@@ -34,7 +44,7 @@ function Profile({ userEmail }) {
       </div>
     );
   }
-  const { username, bio, location, age } = user;
+  const { username, bio, location, age } = userData;
   return (
     <div className="profile">
       <div className="card">

@@ -56,7 +56,7 @@ function Post({ username, caption, imgUrl, postId, user }) {
         <p>Can`t load image</p>
       )}
       <h4 className="post__text">
-        <strong>{username}</strong>: {caption}
+        <strong>{username}</strong>: {caption ? caption : "..."}
       </h4>
       <div className="post__comments">
         {user && (
@@ -79,7 +79,9 @@ function Post({ username, caption, imgUrl, postId, user }) {
             </Button>
           </form>
         )}
-        <span className="post__comments__title">Comments</span>
+        {comments.length > 0 && (
+          <span className="post__comments__title">Comments</span>
+        )}
         {comments.map(({ id, comment }) => (
           <p className="post__comments__comment" key={id}>
             {comment.username} : {comment.comment}

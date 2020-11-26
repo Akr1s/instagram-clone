@@ -3,7 +3,7 @@ import React from "react";
 import { db, auth } from "../../database";
 import firebase from "firebase";
 
-function Confirm({ nextStep, prevStep, values, clearData, setAppUsername }) {
+function Confirm({ nextStep, prevStep, values, clearData }) {
   const { username, bio, password, location, email, age } = values;
 
   const handleConfirm = (event) => {
@@ -21,7 +21,6 @@ function Confirm({ nextStep, prevStep, values, clearData, setAppUsername }) {
           email,
           age,
         });
-        setAppUsername(username);
         nextStep();
         clearData();
         return authUser.user.updateProfile({
