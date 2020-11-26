@@ -35,7 +35,7 @@ function Profile() {
 
   useEffect(() => {
     getUserData(user?.email);
-  }, [user.email]);
+  }, []);
 
   if (loading) {
     return (
