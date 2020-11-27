@@ -17,23 +17,23 @@ function Profile() {
     history.push("/");
   }
 
-  const getUserData = async (email) => {
-    if (!email) return;
-    db.collection("users")
-      .where("email", "==", email)
-      .get()
-      .then(function (querySnapshot) {
-        querySnapshot.forEach(function (doc) {
-          setUserData(doc.data());
-        });
-        setLoading(false);
-      })
-      .catch(function (error) {
-        console.log("Error getting documents: ", error);
-      });
-  };
-
   useEffect(() => {
+    const getUserData = async (email) => {
+      if (!email) return;
+      db.collection("users")
+        .where("email", "==", email)
+        .get()
+        .then(function (querySnapshot) {
+          querySnapshot.forEach(function (doc) {
+            setUserData(doc.data());
+          });
+          setLoading(false);
+        })
+        .catch(function (error) {
+          console.log("Error getting documents: ", error);
+        });
+    };
+
     getUserData(user?.email);
   }, []);
 

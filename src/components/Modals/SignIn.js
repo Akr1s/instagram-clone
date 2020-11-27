@@ -20,6 +20,7 @@ function SignIn({ openSignIn, setOpenSignIn }) {
 
     auth
       .signInWithEmailAndPassword(email, password)
+      .then(clearEmailAndPassword)
       .catch((error) => alert(alert.message));
 
     setOpenSignIn(false);
@@ -29,7 +30,6 @@ function SignIn({ openSignIn, setOpenSignIn }) {
     <Modal
       open={openSignIn}
       onClose={() => {
-        clearEmailAndPassword();
         setOpenSignIn(false);
       }}
     >
