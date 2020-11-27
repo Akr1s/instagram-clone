@@ -17,10 +17,10 @@ function Header() {
     <>
       <SignIn openSignIn={openSignIn} setOpenSignIn={setOpenSignIn} />
       <UploadImage uploadOpen={uploadOpen} setUploadOpen={setUploadOpen} />
-      <div className="app__header">
+      <header className="app__header">
         <Link className="header__routerLink" to="/">
           <img
-            src="https://www.instagram.com/static/images/web/mobile_nav_type_logo.png/735145cfe0a4.png"
+            src={require("../../inst-logo.png")}
             alt="instagram-logo"
             className="app__headerImage"
           />
@@ -51,7 +51,7 @@ function Header() {
               </Button>
               {location.pathname === "/profile" ? null : (
                 <Link className="profileLink" to="/profile">
-                  <Avatar>{user.email[0]}</Avatar>
+                  <Avatar>{user.displayName[0]}</Avatar>
                 </Link>
               )}
             </div>
@@ -77,7 +77,7 @@ function Header() {
             </div>
           )}
         </div>
-      </div>
+      </header>
     </>
   );
 }

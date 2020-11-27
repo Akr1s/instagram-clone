@@ -2,6 +2,7 @@ import { Button, Input, Modal } from "@material-ui/core";
 import React, { useState } from "react";
 import { auth } from "../../database";
 import { useStyles, getModalStyle } from "./styles";
+import "./SignIn.css";
 
 function SignIn({ openSignIn, setOpenSignIn }) {
   const classes = useStyles();
@@ -64,6 +65,7 @@ function SignIn({ openSignIn, setOpenSignIn }) {
             color="primary"
             onClick={handleSignIn}
             type="submit"
+            className="signIn__button"
           >
             Sign In
           </Button>

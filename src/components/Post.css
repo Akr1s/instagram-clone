@@ -1,9 +1,13 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@700&display=swap");
+
 .post {
   max-width: 600px;
   width: 100%;
-  background-color: white;
-  border: 1px solid lightgray;
+  background-color: #30233d;
+  border: 1px solid #291d35;
+  border-radius: 4px;
   margin: 20px 0px;
+  color: white;
 }
 
 .post__image {
@@ -22,6 +26,10 @@
   display: flex;
   align-items: center;
   padding: 20px;
+}
+
+.post__header > h3 {
+  font-family: "Open Sans", sans-serif;
 }
 
 .post__avatar {
@@ -50,5 +58,6 @@
 }
 .post__comments__btn {
   flex: 0;
-  background-color: rgb(180, 173, 173) !important;
+  background: #291d35 !important;
+  color: white !important;
 }

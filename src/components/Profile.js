@@ -52,7 +52,9 @@ function Profile() {
           <Avatar className="card__avatar">{username[0]}</Avatar>
           <div className="card__headerAside">
             <p className="card__username">{username}</p>
-            <p className="card__bio">Status: {bio}</p>
+            <p className="card__bio">
+              <strong>Status:</strong> {bio}
+            </p>
           </div>
         </div>
         <div className="card__info">

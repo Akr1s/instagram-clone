@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+
 * {
   margin: 0;
 }
@@ -7,13 +9,15 @@
 }
 
 .app {
-  background-color: #fafafa;
+  font-family: "Roboto", sans-serif;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 .app__header {
   padding: 20px;
-  border: 1px solid lightgray;
-  background-color: white;
+  background-color: #251b33;
   display: flex;
   justify-content: space-between;
   position: sticky;
@@ -34,6 +38,8 @@
 .app__posts {
   display: flex;
   justify-content: center;
+  background-color: #1d1129;
+  flex-grow: 1;
 }
 .app__postsLeft {
   width: 100%;
@@ -44,6 +50,13 @@
 }
 .app__noposts {
   margin: 20px 0;
+  background-color: #1b1227;
+  color: white;
+  display: flex;
+  flex-grow: 1;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
 }
 .header__routerLink {
   display: flex;
@@ -76,6 +89,21 @@
 .profileLink {
   text-decoration: none;
   margin: 0 10px;
+}
+
+.MuiButton-root,
+.routerLink {
+  background-color: #291d35 !important;
+}
+
+.MuiAvatar-colorDefault {
+  color: #1d1129 !important;
+  background-color: #fff !important;
+}
+
+.flex-stretched {
+  flex-grow: 1;
+  background-color: #1b1227;
 }
 
 @media (max-width: 900px) {

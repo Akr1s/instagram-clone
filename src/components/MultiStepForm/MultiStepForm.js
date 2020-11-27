@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import Confirm from "./Confirm";
 import "./MultiStepForm.css";
 import PersonalInfo from "./PersonalInfo";
@@ -71,7 +72,18 @@ function MultiStepForm() {
       formElement = <h1>Unexpected error</h1>;
   }
 
-  return <div className="multiStepForm">{formElement}</div>;
+  return (
+    <div className="multiStepForm">
+      <Link className="header__routerLink" to="/">
+        <img
+          src={require("../../inst-logo.png")}
+          alt="instagram-logo"
+          className="app__headerImage"
+        />
+      </Link>
+      {formElement}
+    </div>
+  );
 }
 
 export default MultiStepForm;

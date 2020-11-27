@@ -33,7 +33,9 @@ function PostsList() {
             ))}
           </>
         ) : (
-          <h2 className="app__noposts">There aren`t posts yet!</h2>
+          <div className="app__noposts">
+            <h2>There aren`t posts yet!</h2>
+          </div>
         )}
       </div>
     </div>

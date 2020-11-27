@@ -8,6 +8,7 @@ import { ACTIONS } from "./contexts/reducer";
 import { useData } from "./contexts/StateProvider";
 import PostsList from "./components/PostsList";
 import Header from "./components/Header/Header";
+import Footer from "./components/Footer/Footer";
 
 function App() {
   const [_, dispatch] = useData();
@@ -37,6 +38,7 @@ function App() {
           <Profile />
         </Route>
       </Switch>
+      <Footer />
     </div>
   );
 }

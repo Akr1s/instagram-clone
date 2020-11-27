@@ -1,6 +1,9 @@
 .profile {
   width: 100%;
   display: flex;
+  background-color: #1d1129;
+  color: white;
+  flex-grow: 1;
 }
 .card {
   margin: auto;
@@ -9,22 +12,32 @@
   flex-direction: column;
   align-items: center;
   max-width: 1200px;
-  width: 100%;
+  width: auto;
 }
 .card__avatar {
   width: 100px !important;
   height: 100px !important;
+  font-size: 40px !important;
 }
 .card__header {
   display: flex;
 }
 .card__headerAside {
   margin-left: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 .card__info {
   display: inline-flex;
   margin: 10px 0px;
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
 }
 .card__age {
   margin-right: 20px;
+}
+.card__username {
+  margin-bottom: 10px;
 }
