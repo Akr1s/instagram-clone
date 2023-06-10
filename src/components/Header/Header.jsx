@@ -5,6 +5,7 @@ import { useData } from "../../contexts/StateProvider";
 import SignIn from "../Modals/SignIn";
 import UploadImage from "../Modals/UploadImage";
 import { auth } from "../../database";
+import InstLogo from '../../inst-logo.png'
 
 function Header() {
   const [uploadOpen, setUploadOpen] = useState(false);
@@ -20,7 +21,7 @@ function Header() {
       <header className="app__header">
         <Link className="header__routerLink" to="/">
           <img
-            src={require("../../inst-logo.png")}
+            src={InstLogo}
             alt="instagram-logo"
             className="app__headerImage"
           />

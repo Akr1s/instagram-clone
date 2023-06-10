@@ -5,6 +5,7 @@ import "./MultiStepForm.css";
 import PersonalInfo from "./PersonalInfo";
 import PrimaryInfo from "./PrimaryInfo";
 import Success from "./Success";
+import InstLogo from '../../inst-logo.png'
 
 function MultiStepForm() {
   const [step, setStep] = useState(1);
@@ -76,7 +77,7 @@ function MultiStepForm() {
     <div className="multiStepForm">
       <Link className="header__routerLink" to="/">
         <img
-          src={require("../../inst-logo.png")}
+          src={InstLogo}
           alt="instagram-logo"
           className="app__headerImage"
         />
