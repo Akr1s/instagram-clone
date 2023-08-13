@@ -1,11 +1,10 @@
 import React, { useState } from "react";
 import { auth } from "../../database";
-import { useStyles, getModalStyle } from "./styles";
+import { classes, getModalStyle } from "./styles";
 import "./SignIn.css";
-import { Button, Input, Modal } from "@mui/material";
+import { Box, Button, Input, Modal } from "@mui/material";
 
 function SignIn({ openSignIn, setOpenSignIn }) {
-  const classes = useStyles();
   const [modalStyle] = React.useState(getModalStyle);
 
   const [email, setEmail] = useState("");
@@ -34,7 +33,7 @@ function SignIn({ openSignIn, setOpenSignIn }) {
         setOpenSignIn(false);
       }}
     >
-      <div style={modalStyle} className={classes.paper}>
+      <Box style={modalStyle} sx={classes.paper}>
         <form className="app_signUp">
           <center>
             <img
@@ -70,7 +69,7 @@ function SignIn({ openSignIn, setOpenSignIn }) {
             Sign In
           </Button>
         </form>
-      </div>
+      </Box>
     </Modal>
   );
 }

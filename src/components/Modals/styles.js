@@ -1,5 +1,3 @@
-import { makeStyles } from "@mui/styles";
-
 export function getModalStyle() {
   const top = 50;
   const left = 50;
@@ -11,8 +9,8 @@ export function getModalStyle() {
   };
 }
 
-export const useStyles = makeStyles((theme) => ({
-  paper: {
+export const classes = {
+  paper: (theme) => ({
     position: "absolute",
     width: 400,
     backgroundColor: theme.palette.background.paper,
@@ -20,5 +18,5 @@ export const useStyles = makeStyles((theme) => ({
     boxShadow: theme.shadows[5],
     padding: theme.spacing(2, 4, 3),
     borderRadius: "5px",
-  },
-}));
+  }),
+};
