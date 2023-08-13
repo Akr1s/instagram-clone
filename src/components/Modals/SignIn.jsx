@@ -1,8 +1,8 @@
-import { Button, Input, Modal } from "@material-ui/core";
 import React, { useState } from "react";
 import { auth } from "../../database";
 import { useStyles, getModalStyle } from "./styles";
 import "./SignIn.css";
+import { Button, Input, Modal } from "@mui/material";
 
 function SignIn({ openSignIn, setOpenSignIn }) {
   const classes = useStyles();

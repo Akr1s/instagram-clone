@@ -1,11 +1,11 @@
-import { Avatar, Button } from "@material-ui/core";
 import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { useData } from "../../contexts/StateProvider";
 import SignIn from "../Modals/SignIn";
 import UploadImage from "../Modals/UploadImage";
 import { auth } from "../../database";
-import InstLogo from '../../inst-logo.png'
+import InstLogo from "../../inst-logo.png";
+import { Avatar, Button } from "@mui/material";
 
 function Header() {
   const [uploadOpen, setUploadOpen] = useState(false);

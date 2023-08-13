@@ -1,10 +1,10 @@
-import { Avatar } from "@material-ui/core";
 import React, { useState } from "react";
 import { useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { useData } from "../contexts/StateProvider";
 import { db } from "../database";
 import "./Profile.css";
+import { Avatar } from "@mui/material";
 
 function Profile() {
   const [loading, setLoading] = useState(true);

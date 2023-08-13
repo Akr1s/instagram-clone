@@ -1,15 +1,9 @@
+import { Button } from "@mui/material";
 import React from "react";
-import { Button } from "@material-ui/core";
 
 function PrimaryInfo({ nextStep, values }) {
-  const {
-    username,
-    setUsername,
-    password,
-    setPassword,
-    email,
-    setEmail,
-  } = values;
+  const { username, setUsername, password, setPassword, email, setEmail } =
+    values;
   return (
     <>
       <h2 className="form__title">Fill fields below</h2>

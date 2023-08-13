@@ -1,8 +1,8 @@
-import { Button, Input } from "@material-ui/core";
 import React, { useState } from "react";
 import "./ImageUpload.css";
 import { storage, db } from "../database";
 import firebase from "firebase";
+import { Button, Input } from "@mui/material";
 
 function ImageUpload({ username, closeModal }) {
   const [caption, setCaption] = useState("");

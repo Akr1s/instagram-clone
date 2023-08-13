@@ -6,16 +6,20 @@ import * as serviceWorker from "./serviceWorker";
 import { BrowserRouter } from "react-router-dom";
 import StateProvider from "./contexts/StateProvider";
 import { reducer, initialState } from "./contexts/reducer";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
+const theme = createTheme();
 
 root.render(
   // <React.StrictMode>
-  <BrowserRouter>
-    <StateProvider reducer={reducer} initialState={initialState}>
-      <App />
-    </StateProvider>
-  </BrowserRouter>
+  <ThemeProvider theme={theme}>
+    <BrowserRouter>
+      <StateProvider reducer={reducer} initialState={initialState}>
+        <App />
+      </StateProvider>
+    </BrowserRouter>
+  </ThemeProvider>
   // </React.StrictMode>
 );
 

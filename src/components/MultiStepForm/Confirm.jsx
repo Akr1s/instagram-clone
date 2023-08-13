@@ -1,7 +1,7 @@
-import { Button, List, ListItem } from "@material-ui/core";
 import React from "react";
 import { db, auth } from "../../database";
 import firebase from "firebase";
+import { Button, List, ListItem } from "@mui/material";
 
 function Confirm({ nextStep, prevStep, values, clearData }) {
   const { username, bio, password, location, email, age } = values;

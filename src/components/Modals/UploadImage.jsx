@@ -1,8 +1,8 @@
-import { Modal } from "@material-ui/core";
 import React from "react";
 import { useData } from "../../contexts/StateProvider";
 import { useStyles, getModalStyle } from "./styles";
 import ImageUpload from "../ImageUpload";
+import { Modal } from "@mui/material";
 
 function UploadImage({ uploadOpen, setUploadOpen }) {
   const classes = useStyles();
