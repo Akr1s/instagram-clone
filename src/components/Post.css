@@ -50,12 +50,6 @@
   margin-bottom: 5px;
 }
 
-.post__comments__input {
-  line-height: 100%;
-  flex: 1;
-  padding: 0px 10px;
-  border: none;
-}
 .post__comments__btn {
   flex: 0;
   background: #291d35 !important;

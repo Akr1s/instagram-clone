@@ -1,12 +1,27 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./Post.css";
 import { db } from "../database";
 import firebase from "firebase";
-import { Avatar, Button } from "@mui/material";
+import { Avatar, Box, Button, Popover, TextField } from "@mui/material";
+import MentionPopover from "./MentionPopover";
+
+const properties = [
+  "font-size",
+  "font-family",
+  "line-height",
+  "width",
+  "padding-top",
+  "padding-right",
+  "padding-bottom",
+  "padding-left",
+];
 
 function Post({ username, caption, imgUrl, postId, user }) {
+  const inputRef = useRef(null);
+
   const [comments, setComments] = useState([]);
   const [commentText, setCommentText] = useState("");
+  const [coords, setCoords] = useState(null);
 
   useEffect(() => {
     let unsunscribe;
@@ -27,9 +42,7 @@ function Post({ username, caption, imgUrl, postId, user }) {
     };
   }, [postId]);
 
-  const handlePostComment = (event) => {
-    event.preventDefault();
-
+  const handlePostComment = () => {
     db.collection("posts").doc(postId).collection("comments").add({
       timestamp: firebase.firestore.FieldValue.serverTimestamp(),
       comment: commentText,
@@ -37,6 +50,66 @@ function Post({ username, caption, imgUrl, postId, user }) {
     });
 
     setCommentText("");
+  };
+
+  const getUpdatedText = (element, text = "") => {
+    const selectionStart = element.selectionStart;
+    const startPart = element.innerHTML.slice(0, selectionStart);
+    const endPart = element.innerHTML.slice(selectionStart);
+    return `${startPart}${text}${endPart}`;
+  };
+
+  const createDiv = () => {
+    const div = document.createElement("div");
+    div.innerHTML = getUpdatedText(inputRef.current, '@<span id="target" />');
+    const styles = getComputedStyle(inputRef.current);
+    const styleText = properties.reduce(
+      (str, property) =>
+        `${str}${property}:${styles.getPropertyValue(property)};`,
+      ""
+    );
+    div.style.cssText = `${styleText}white-space:pre;position:absolute;overflow:auto;max-height:170px;opacity:0;`;
+
+    const parentRect = inputRef.current.getBoundingClientRect();
+    div.top = parentRect.top;
+    div.left = parentRect.left;
+    document.body.append(div);
+
+    const target = div.querySelector("#target");
+    const top = parentRect.top + target.offsetTop - inputRef.current.scrollTop;
+    const left = parentRect.left + target.offsetLeft + 4;
+    setCoords({ top, left });
+    div.remove();
+  };
+
+  const onKeyDown = (event) => {
+    if (event.key === "Enter" && !event.shiftKey) {
+      event.preventDefault();
+      handlePostComment();
+    }
+
+    const value = event.target.value;
+    const selectionIndex = event.target.selectionStart;
+    const prevSymbol = value[selectionIndex - 1];
+    const nextSymbol = value[selectionIndex];
+
+    if (
+      event.key === "@" &&
+      !(
+        (prevSymbol && !prevSymbol.match(/.*\s$/)) ||
+        (nextSymbol && !nextSymbol.match(/.*\s$/))
+      )
+    ) {
+      createDiv();
+      setCommentText(getUpdatedText(inputRef.current, "@"));
+    }
+  };
+
+  const closeMentions = () => setCoords(null);
+
+  const onMentionClick = (user) => {
+    setCommentText(getUpdatedText(inputRef.current, `${user.username} `));
+    closeMentions();
   };
 
   return (
@@ -59,15 +132,21 @@ function Post({ username, caption, imgUrl, postId, user }) {
       </h4>
       <div className="post__comments">
         {user && (
-          <form className="post__comments__form">
-            <input
+          <Box className="post__comments__form">
+            <TextField
               type="text"
               placeholder="Add a comment..."
-              className="post__comments__input"
+              fullWidth
               value={commentText}
+              inputProps={{ style: { color: "white" } }}
+              inputRef={inputRef}
+              onKeyDown={onKeyDown}
               onChange={(event) => {
                 setCommentText(event.target.value);
               }}
+              maxRows={3}
+              minRows={1}
+              multiline
             />
             <Button
               className="post__comments__btn"
@@ -76,7 +155,7 @@ function Post({ username, caption, imgUrl, postId, user }) {
             >
               Post
             </Button>
-          </form>
+          </Box>
         )}
         {comments.length > 0 && (
           <span className="post__comments__title">Comments</span>
@@ -86,6 +165,14 @@ function Post({ username, caption, imgUrl, postId, user }) {
             {comment.username} : {comment.comment}
           </p>
         ))}
+        <div id="here"></div>
+        {coords && (
+          <MentionPopover
+            coords={coords}
+            onClose={closeMentions}
+            onMentionClick={onMentionClick}
+          />
+        )}
       </div>
     </div>
   );
